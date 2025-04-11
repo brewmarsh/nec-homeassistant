@@ -1,0 +1,16 @@
+{
+  "domain": "nec_ha",
+  "name": "NEC Devices",
+  "version": "0.1.0",
+  "codeowners": ["@your-github-username"],
+  "config_flow": true,
+  "documentation": "https://github.com/brewmarsh/nec-homeassistant",
+  "requirements": ["aiohttp"],
+  "ssdp": [],
+  "zeroconf": [],
+  "homekit": {},
+  "dependencies": [],
+  "after_dependencies": [],
+  "issue_tracker": "https://github.com/brewmarsh/nec-homeassistant/issues",
+  "quality_scale": "internal"
+}
