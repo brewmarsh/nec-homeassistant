@@ -1,0 +1,20 @@
+#  Development Dependencies for NEC Home Assistant Integration
+
+#  Code Quality
+flake8
+black
+isort
+pylint
+
+#  Home Assistant Testing
+pytest
+pytest-homeassistant
+coverage
+
+# Home Assistant Classes
+types-home-assistant
+
+#  Optional (for coverage reporting)
+codecov  #  Or any other coverage reporting tool
+
+#  Add any other development tools you use

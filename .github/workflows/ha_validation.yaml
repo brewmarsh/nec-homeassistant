@@ -1,0 +1,47 @@
+name: Home Assistant Validation
+
+on:
+  push:
+    branches:
+      - main  # Or your main branch
+  pull_request:
+
+jobs:
+  ha_validation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"  # Or your preferred Python version
+      - name: Install Home Assistant
+        run: |
+          python -m pip install --upgrade pip
+          pip install homeassistant
+      - name: Install Testing Dependencies
+        run: |
+          pip install pytest pytest-homeassistant  # Install pytest and any HA testing helpers
+      - name: Copy Configuration (Example - Adjust as needed)
+        run: |
+          #  If your tests require a specific Home Assistant configuration,
+          #  copy it to the config directory.  This is an example; you
+          #  might need to generate configuration files dynamically.
+          mkdir -p config
+          cp tests/configuration.yaml config/configuration.yaml  # Or create it dynamically
+      - name: Run Home Assistant Validation Tests
+        uses: home-assistant/runner@main
+        with:
+          use_os: "true"  # Run tests in the Home Assistant OS environment
+          config_dir: "config"  # Specify the configuration directory
+          wait_for_login: "false" # Don't wait for login
+          #  Add any other necessary options for the runner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed for some HA test operations
+      - name: Report Test Results (Example - Adjust if needed)
+        if: failure()  # Only run if tests fail
+        run: |
+          echo "Home Assistant Validation Tests Failed!"
+          #  You might want to add commands to collect and display
+          #  test failure information here.
+          #  For example, printing the contents of log files.
